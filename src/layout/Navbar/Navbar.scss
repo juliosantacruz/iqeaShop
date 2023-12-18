@@ -1,0 +1,25 @@
+.header{
+  .navbar{
+    background-color: rgb(109, 109, 109);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 var(--general-padding);
+  .logo{
+    height: 60px;
+
+    img{
+      height: 100%;
+    }
+  }
+  ul{
+    display: flex;
+    align-items: center;
+
+    li{
+      list-style: none;
+      padding: 20px;
+      cursor: pointer;
+    }
+  }
+  }
+}

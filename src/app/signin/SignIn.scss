@@ -1,0 +1,31 @@
+.signInPage{
+
+  // padding: 0 var(--general-padding);
+  color: var(--text-primary-color);
+  background-color: var(--background-signIn);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .signInImg{
+
+    width: 40%;
+
+    img{
+      width: 100%;
+      height: calc( 100vh - 200px);
+      object-fit: cover;
+    }
+  }
+  .signInData{
+    width: 60%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+  }
+
+}
