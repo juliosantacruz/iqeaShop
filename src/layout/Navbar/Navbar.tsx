@@ -14,11 +14,14 @@ export default function Navbar() {
           </Link>
         </div>
         <ul>
+        <li>
+            <Link href={"/dashboard"}>Dashboard</Link>
+          </li>
           <li>
             <Link href={"/perfil"}>Perfil</Link>
           </li>
           <li>
-            <Link href={"/signin"}>Sign In</Link>
+            <Link href={"/signup"}>Registrate</Link>
           </li>
           <li>
             <Link href={"/login"}>Log In</Link>

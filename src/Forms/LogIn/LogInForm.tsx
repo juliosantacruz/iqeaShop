@@ -106,7 +106,7 @@ export async function postNewCustomer(customerData: any, token: any) {
   return {Response, data}
 }
 
-export default function SignInForm() {
+export default function LogInForm() {
   const [formData, setFormData] = useState<SignInForm>(formTest);
   const [isRegister, setIsRegister] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -169,15 +169,6 @@ export default function SignInForm() {
           />
         </div>
         <div className="formRow">
-          <label htmlFor="">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={(event: any) => onChange(event)}
-          />
-        </div>
-        <div className="formRow">
           <label htmlFor="">Contrasenia </label>
           <input
             type="password"
@@ -186,65 +177,13 @@ export default function SignInForm() {
             onChange={(event: any) => onChange(event)}
           />
         </div>
-        <div className="formRow">
-          <label htmlFor="">Confirmar Contrasenia </label>
-          <input
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={(event: any) => onChange(event)}
-          />
-        </div>
-      </fieldset>
-      <fieldset title="usuario">
-        <h4>Contact Info</h4>
-
-        <div className="formRow">
-          <label htmlFor="">Nombre Completo</label>
-          <input type="text" name="nombreCompleto" />
-        </div>
-        <div className="formRow">
-          <label htmlFor="">Apeido</label>
-          <input type="text" name="apeido" />
-        </div>
-        <div className="formRow">
-          <label htmlFor="">Telefono de Contacto</label>
-          <input type="text" name="telefonoContacto" />
-        </div>
-        <div className="formRow">
-          <label htmlFor="">Fecha de Cumpleanios</label>
-          <input type="date" name="cumpleanios" />
-        </div>
       </fieldset>
 
-      <fieldset title="direccion base">
-        <h4>Direccion Base</h4>
-        <div className="formRow">
-          <label htmlFor="">Calle y numero</label>
-          <input type="text" name="street_1" />
-        </div>
-        <div className="formRow">
-          <label htmlFor="">Fraccionamiento / Colonia</label>
-          <input type="text" name="street_2" />
-        </div>
-        <div className="formRow">
-          <label htmlFor="">Estado</label>
-          <input type="text" name="estado" />
-        </div>
-        <div className="formRow">
-          <label htmlFor="">Pais</label>
-          <input type="text" name="pais" />
-        </div>
-        <div className="formRow">
-          <label htmlFor="">Codigo Postal</label>
-          <input type="text" name="codigoPostal" />
-        </div>
-      </fieldset>
       <div className="forgotPassword">
         <Link href={"#"}>Olvidaste tu contrasenia..?</Link>
       </div>
       <div className="formBtn">
-        <button type="submit">Registrate</button>
+        <button type="submit">Continuar</button>
       </div>
       <div className="formNewUser">
         No tienes cuenta..? <Link href={"#"}>Registrate aqui..</Link>
