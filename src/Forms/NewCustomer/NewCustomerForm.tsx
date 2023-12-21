@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import "./NewCustomerForm.scss";
 import InputComponent from "@/components/InputComponent";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 export type AddressType = {
   street: string;
@@ -108,17 +108,13 @@ export default function NewCustomerForm({ token }: any) {
 
       // Si el registro es exitoso, redirige a la página de inicio
       if (customer.data) {
-
-
-
-        router.push('/');
+        router.push("/");
       } else {
-        console.error('Error en el registro:', customer.data);
+        console.error("Error en el registro:", customer.data);
       }
     } catch (error) {
-      console.error('Error en el registro:', error);
+      console.error("Error en el registro:", error);
     }
-
   };
 
   const handleChange = (event: any) => {

@@ -1,149 +1,72 @@
 "use client";
 import Link from "next/link";
 import React, { useState } from "react";
-import "./SignInForms.scss";
+import "./LogInForm.scss";
+import InputComponent from "@/components/InputComponent";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
-export type AddressType = {
-  street: string;
-  street_2: string;
-  state: string;
-  country: string;
-  zip: string;
-};
-
-export type SignInForm = {
+export type LogInForm = {
   username: string;
   email: string;
   password: string;
-  confirmPassword: string;
-  name: string;
-  lastname: string;
-  phone: string;
-  birthday: string | Date;
-  base_address: AddressType;
 };
 
 const formTest = {
-  username: "tes3nal",
-  email: "fiss3dal@test.com",
+  username: "juanxD99",
+  email: "test@test.com",
   password: "asdf1234",
-  confirmPassword: "asdf1234",
-  name: "final test",
-  lastname: "apeido final",
-  phone: "66422443970",
-  birthday: "2003-12-12",
-  base_address: {
-    street: "calle prueba #34",
-    street_2: "Residencial aguacaliente",
-    state: "Sonora",
-    country: "Argentina",
-    zip: "22000",
-  },
 };
 
-// Esta funcion registra a un Usuario nuevo, no requiere Auth
-export async function postNewUser(userData: any) {
-  try {
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    const raw = JSON.stringify(userData);
-    const requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      mode: "cors",
-      redirect: "follow",
-    };
-
-    const res = await fetch(
-      `http://localhost:1337/api/auth/local/register`,
-      requestOptions as any
-    )
-      .then((res) => res.text())
-      .then((result) => result)
-      .catch((error) => console.log("error", error));
-
-    return JSON.parse(res as string);
-  } catch (error) {
-    console.error("Error during postNewUser:", error);
-    throw error;
-  }
-}
-
-// Esta funcion registra un CLiente nuevo (Obtiene el Barrer de postNewUser())
-export async function postNewCustomer(customerData: any, token: any) {
-  console.log("todo bien", token);
-
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-  myHeaders.append(
-    "Authorization",
-    `Bearer ${token.jwt}`
-  );
-
-  var raw = JSON.stringify({
-    data: {
-      ...customerData,
-      users_permissions_user: token.user.id,
-    },
-  });
-
-  var requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body: raw,
-    redirect: "follow",
-  };
-
-  const res= await fetch("http://localhost:1337/api/customers/", requestOptions as any)
-    .then((response) => response.text())
-    .then((result) => result)
-    .catch((error) => console.log("error", error));
-
-
-    const data = JSON.parse(res as string)
-  return {Response, data}
-}
-
 export default function LogInForm() {
-  const [formData, setFormData] = useState<SignInForm>(formTest);
-  const [isRegister, setIsRegister] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState<LogInForm>(formTest);
+  const router = useRouter();
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    setLoading(true);
 
-    const userData = {
-      username: formData.username,
-      email: formData.email,
-      password: formData.password,
-    };
-    const jwtToken = await postNewUser(userData);
+    // await signIn("credentials", {
+    //   identifier: formData.username,
+    //   password: formData.password,
+    //   redirect: false,
+    // })
+    //   .then((res) => {
+    //     console.log(res)
+    //     if((res as any).ok){
+    //       router.push('/');
+    //     }})
+    //   .catch((error) => console.log(error));
 
-    const customerData = {
-      name: formData.name,
-      lastname: formData.lastname,
-      phone: formData.phone,
-      birthday: formData.birthday,
-      base_address: {
-        street: formData.base_address.street,
-        street_2: formData.base_address.street_2,
-        state: formData.base_address.state,
-        country: formData.base_address.country,
-        zip: formData.base_address.zip,
-      },
-    };
-    const customer = await postNewCustomer(customerData, jwtToken);
+    try {
+      const res = await signIn("credentials", {
+        identifier: formData.username,
+        password: formData.password,
+        redirect: false,
+      });
 
-    console.log(customer.Response, customer.data)
+      if ((res as any).ok) {
+        const urlString = res?.url;
+        const url = new URL(urlString as string);
+        // Obtiene el valor del parámetro 'callbackUrl'
+        const callbackUrlParam = url.searchParams.get("callbackUrl");
 
+        // Decodifica el valor para obtener la URL original
+        const decodedCallbackUrl = decodeURIComponent(
+          callbackUrlParam as string
+        );
+
+        const finalURL = new URL(decodedCallbackUrl as string);
+        const path = finalURL.pathname;
+        router.push(`${path}` || "/dashboard");
+      }
+    } catch (error) {
+      console.error("Error during authentication:", error);
+      // Puedes mostrar un mensaje de error al usuario aquí
+    }
   };
 
-  const onChange = (event: any) => {
+  const handleChange = (event: any) => {
     const dato = event?.target.value;
-
     setFormData({
       ...formData,
       [event.target.name]: dato,
@@ -157,24 +80,22 @@ export default function LogInForm() {
       onSubmit={(event) => handleSubmit(event)}
     >
       <fieldset title="useData">
-        <h4>User Data</h4>
-
         <div className="formRow">
-          <label htmlFor="">Username</label>
-          <input
+          <InputComponent
+            name="username"
+            label="Nombre de Usuario"
             type="text"
-            name="text"
             value={formData.username}
-            onChange={(event: any) => onChange(event)}
+            inputChange={(event: any) => handleChange(event)}
           />
         </div>
         <div className="formRow">
-          <label htmlFor="">Contrasenia </label>
-          <input
-            type="password"
+          <InputComponent
             name="password"
+            label="Contraseña"
+            type="password"
             value={formData.password}
-            onChange={(event: any) => onChange(event)}
+            inputChange={(event: any) => handleChange(event)}
           />
         </div>
       </fieldset>
@@ -186,7 +107,7 @@ export default function LogInForm() {
         <button type="submit">Continuar</button>
       </div>
       <div className="formNewUser">
-        No tienes cuenta..? <Link href={"#"}>Registrate aqui..</Link>
+        No tienes cuenta..? <Link href={"/signup"}>Registrate aqui..</Link>
       </div>
     </form>
   );

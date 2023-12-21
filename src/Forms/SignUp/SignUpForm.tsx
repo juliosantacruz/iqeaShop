@@ -156,13 +156,9 @@ export default function SignInForm({
         <button type="submit">Continuar</button>
       </div>
       <div className="formNewUser">
-        Ya tienes cuenta..? <Link href={"#"}>Inicia Sesion aqui..</Link>
+        Ya tienes cuenta..? <Link href={"/login"}>Inicia Sesion aqui..</Link>
       </div>
     </form>
   );
 }
 
-
-"eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..EPSu9Ro_mxtVNHNF.OR8WV21mqj5H_yi_U9FzCqN1_9FGSw6s1PttUyCNXYD7xXyMJ6OyVlYD0sK3A619TcS4KC-t_wkZV5jvKSa7iHws7FOYPrWLZIwxkWRuMjQ.eMgl_vxgiQN7hkOE-7sJAw"
-
-"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTE4LCJpYXQiOjE3MDMwOTc3NTksImV4cCI6MTcwNTY4OTc1OX0.D-lkIFfZYnGfPlkhdTLLcseoiGuv-27KV0cD7jhHjj0"

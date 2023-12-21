@@ -3,6 +3,7 @@ import React from "react";
 import "./Navbar.scss";
 import logo from "@/assets/logo_temporal.png";
 import Link from "next/link";
+import SignOutButton from "@/components/SignOutButton";
 
 export default function Navbar() {
   return (
@@ -26,7 +27,7 @@ export default function Navbar() {
           <li>
             <Link href={"/login"}>Log In</Link>
           </li>
-          <li>test 4</li>
+          <li><SignOutButton/>  </li>
         </ul>
       </nav>
     </header>

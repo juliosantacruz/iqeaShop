@@ -4,8 +4,10 @@ import Image from "next/image";
 import bgImage from "@/assets/contactoImg.jpg";
 import logoImage from "@/assets/logo_temporal.png";
 import Link from "next/link";
+import LogInForm from "@/Forms/LogIn/LogInForm";
 
 export default function SignIn() {
+
   return (
     <section className="signInPage">
       <div className="signInImg">
@@ -13,11 +15,14 @@ export default function SignIn() {
       </div>
 
       <div className="signInData">
-        <form action="" className="signInForm">
+        <div className="LogInHeader">
           <div className="formTitle">
             <h2>Iniciar Sesion</h2>
           </div>{" "}
           <Image src={logoImage} alt="logo" />
+
+        </div>
+        {/* <form action="" className="signInForm">
           <div className="formRow">
             <label htmlFor="">Email</label>
             <input type="email" name="email" />
@@ -36,7 +41,9 @@ export default function SignIn() {
           <div className="formNewUser">
             No tienes cuenta..? <Link href={"#"}>Registrate aqui..</Link>
           </div>
-        </form>
+        </form> */}
+
+        <LogInForm/>
       </div>
     </section>
   );
