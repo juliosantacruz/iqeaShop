@@ -7,6 +7,12 @@ export default function DashboardPage() {
   const {data:session, status}= useSession()
   console.log(session, status)
   return (
+    <>
     <div>page</div>
+
+  </>
   )
 }
+
+
+

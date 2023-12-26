@@ -3,7 +3,7 @@ import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 
 
-const handler = NextAuth({
+export const authOptions = {
   providers: [
     CredentialsProvider({
       // The name to display on the sign in form (e.g. 'Sign in with...')
@@ -46,13 +46,14 @@ const handler = NextAuth({
     })
   ],
   callbacks:{
-    jwt({token, user}){
+    jwt({token, user}:any){
       // console.log({account, token, user, profile, session})
       if(user) token.user = user
       // console.log(token)
+
       return token
     },
-    session({session, token}){
+    session({session, token}:any){
       const {user:oldUser} = token.user as any
       const userData = {
         id:oldUser.id,
@@ -61,7 +62,12 @@ const handler = NextAuth({
         isConfirmed:oldUser.confirmed
       }
       session.user = userData
-      return session
+
+      const newSession ={
+        ...session, accessToken:(token.user as any).jwt
+      }
+      // console.log(newSession)
+      return newSession
     }
   },
   pages:{
@@ -69,6 +75,8 @@ const handler = NextAuth({
     // newUser:'/signup'
 
   }
-})
+}
 
-export { handler as GET, handler as POST }
+const handlerAuth = NextAuth(authOptions)
+
+export { handlerAuth as GET, handlerAuth as POST }

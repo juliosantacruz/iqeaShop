@@ -80,7 +80,7 @@ export default function SignInForm({
     }
 
     setToken(jwtToken);
-    console.log(jwtToken)
+    // console.log(jwtToken)
     await signInSession();
   };
 

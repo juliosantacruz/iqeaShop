@@ -25,40 +25,19 @@ export default function LogInForm() {
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
-    // await signIn("credentials", {
-    //   identifier: formData.username,
-    //   password: formData.password,
-    //   redirect: false,
-    // })
-    //   .then((res) => {
-    //     console.log(res)
-    //     if((res as any).ok){
-    //       router.push('/');
-    //     }})
-    //   .catch((error) => console.log(error));
-
     try {
       const res = await signIn("credentials", {
         identifier: formData.username,
         password: formData.password,
         redirect: false,
       });
+      // console.log(res)
 
       if ((res as any).ok) {
-        const urlString = res?.url;
-        const url = new URL(urlString as string);
-        // Obtiene el valor del parámetro 'callbackUrl'
-        const callbackUrlParam = url.searchParams.get("callbackUrl");
 
-        // Decodifica el valor para obtener la URL original
-        const decodedCallbackUrl = decodeURIComponent(
-          callbackUrlParam as string
-        );
 
-        const finalURL = new URL(decodedCallbackUrl as string);
-        const path = finalURL.pathname;
-        router.push(`${path}` || "/dashboard");
-      }
+          router.push("/perfil");
+        }
     } catch (error) {
       console.error("Error during authentication:", error);
       // Puedes mostrar un mensaje de error al usuario aquí

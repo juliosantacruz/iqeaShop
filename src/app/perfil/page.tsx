@@ -1,9 +1,14 @@
 import React from "react";
 import "./Perfil.scss";
 import { getCustomerData } from "@/services/fetchData";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
+
 
 export default async function Perfil() {
-  const userData = await getCustomerData();
+  const session = await getServerSession(authOptions)
+
+  const userData = await getCustomerData(session.accessToken);
 
   const { id, username, email, customer } = userData;
 
