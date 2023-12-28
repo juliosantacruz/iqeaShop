@@ -2,6 +2,7 @@ import { getProductCategories } from "@/services/fetchData";
 import Image from "next/image";
 import React from "react";
 import './CategoryBanner.scss'
+import Link from "next/link";
 
 
 // Pendiente agregar Link hacia pagina de categorias
@@ -34,6 +35,7 @@ export default async function CategoryBanner() {
               title={category.title}
               imgUrl={category.imgUrl}
               imgAlt={category.imgAlt}
+              slug={category.slug}
             />
           )
         }):
@@ -47,10 +49,13 @@ type CategoryIconProps = {
   imgUrl: string;
   imgAlt: string;
   title: string;
+  slug?:string;
 };
 
 const CategoryIcon = (props: CategoryIconProps) => {
   return (
+    <Link href={`/categoria/${props.slug}`} >
+
     <div className="categoryIcon">
       <div className="categoryImg">
         <Image src={props.imgUrl} alt={props.imgAlt} width={80} height={80} />
@@ -59,5 +64,6 @@ const CategoryIcon = (props: CategoryIconProps) => {
         <h4>{props.title}</h4>
       </div>
     </div>
+    </Link>
   );
 };

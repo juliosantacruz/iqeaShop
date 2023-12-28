@@ -1,11 +1,12 @@
-'use client'
-import { useSession } from 'next-auth/react'
-import React from 'react'
+import React from "react";
 
-export default function DashboardPage() {
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 
-  const {data:session, status}= useSession()
-  console.log(session, status)
+export default async function DashboardPage() {
+  const session = await getServerSession(authOptions)
+
+  console.log(session)
   return (
     <>
     <div>page</div>

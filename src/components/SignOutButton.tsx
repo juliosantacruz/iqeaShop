@@ -1,14 +1,29 @@
 'use client'
 import React from 'react'
 import { signOut } from 'next-auth/react'
+import styled from 'styled-components'
 
 
-export default function SignOutButton() {
+function SignOutButton({className}:any) {
   const onSignOut=()=>{
     signOut({ callbackUrl: '/' })
 
   }
   return (
-    <button onClick={onSignOut}>Cerrar Session</button>
+    <div className={className}>
+      <button onClick={onSignOut} className='signOutButton'>Cerrar Session</button>
+
+    </div>
   )
 }
+
+export default styled(SignOutButton)`
+
+  .signOutButton{
+    border:none;
+    background-color:#ffffff00;
+    font-size:16px;
+
+  }
+
+`

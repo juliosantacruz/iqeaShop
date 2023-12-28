@@ -1,6 +1,6 @@
 
 
-
+// http://localhost:1337/api/product-categories/productos-quimicos
 
 const API_URL_STRAPI = "http://localhost:1337/api";
 
@@ -16,16 +16,22 @@ export async function getProductCategories() {
   return data;
 }
 
+export async function getProductCategoryBySlug(categorySlug:string) {
+  const res = await fetch(
+    `${API_URL_STRAPI}/product-categories/${categorySlug}`
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  const { data } = await res.json();
+  return data;
+}
+
+
+
+
 export async function getCustomerData(jwtCookie:string) {
-
-
-
-//  const jwtCookie = document.cookie
-//     .split("; ")
-//     .find((row) => row.startsWith("next-auth.session-token="))
-//     ?.split("=")[1];
-
-  // console.log(jwtCookie)
   if (!jwtCookie) {
     // Manejar el caso en que la cookie no esté presente
     console.error("JWT token not found in cookies");

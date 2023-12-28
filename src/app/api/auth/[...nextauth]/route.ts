@@ -59,6 +59,7 @@ export const authOptions = {
         id:oldUser.id,
         username:oldUser.username,
         email:oldUser.email,
+        role:oldUser.roleStore || 'customer',
         isConfirmed:oldUser.confirmed
       }
       session.user = userData

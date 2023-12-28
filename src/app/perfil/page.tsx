@@ -10,10 +10,10 @@ export default async function Perfil() {
 
   const userData = await getCustomerData(session.accessToken);
 
-  const { id, username, email, customer } = userData;
+  const { id, username, email, roleStore, customer } = userData;
 
   const { name, lastname, birthday, phone, orders, base_address } = customer;
-  // console.log(base_address);
+  console.log('role',roleStore);
 
   const { street, street_2, state, country, zip } = base_address;
   return (
