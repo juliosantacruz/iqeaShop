@@ -1,17 +1,28 @@
 import { ProductCategory } from "./ProductCategory"
 import { ProductTag } from "./ProductTag"
 
+export type ProductCategoryTag={
+  id:string|number,
+  title:string,
+  slug:string,
+
+}
+
+
+
 export type Products={
+  id:string|number,
   title:string,
   slug:string,
   description:string,
   price:number,
   unit:string,
   inventario:number,
-  image1:string,
-  image2:string,
+  image_1?:any,
+  image_2?:any,
   isNew:boolean,
   isFeatured:boolean,
-  product_tag:ProductTag,
-  product_categories:ProductCategory
+  product_tags?:ProductTag[],
+  product_categories?:ProductCategoryTag
+  stripe_product_id:string,
 }

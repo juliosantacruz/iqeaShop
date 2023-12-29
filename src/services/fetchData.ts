@@ -1,5 +1,3 @@
-
-
 // http://localhost:1337/api/product-categories/productos-quimicos
 
 const API_URL_STRAPI = "http://localhost:1337/api";
@@ -16,7 +14,7 @@ export async function getProductCategories() {
   return data;
 }
 
-export async function getProductCategoryBySlug(categorySlug:string) {
+export async function getProductCategoryBySlug(categorySlug: string) {
   const res = await fetch(
     `${API_URL_STRAPI}/product-categories/${categorySlug}`
   );
@@ -28,10 +26,19 @@ export async function getProductCategoryBySlug(categorySlug:string) {
   return data;
 }
 
+export async function getProductBySlug(slug: string) {
+  const res = await fetch(
+    `${API_URL_STRAPI}/products/${slug}`
+  );
 
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  const { data } = await res.json();
+  return data;
+}
 
-
-export async function getCustomerData(jwtCookie:string) {
+export async function getCustomerData(jwtCookie: string) {
   if (!jwtCookie) {
     // Manejar el caso en que la cookie no esté presente
     console.error("JWT token not found in cookies");
@@ -47,7 +54,7 @@ export async function getCustomerData(jwtCookie:string) {
     headers: myHeaders,
     redirect: "follow",
   };
- try {
+  try {
     const response = await fetch(
       `${API_URL_STRAPI}/users/me?populate[customer][populate][orders][populate]=*&populate[customer][populate][base_address][populate]=*`,
       requestOptions as any
@@ -66,6 +73,4 @@ export async function getCustomerData(jwtCookie:string) {
   }
 }
 
-
-"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTE3LCJpYXQiOjE3MDMxODU4NDAsImV4cCI6MTcwNTc3Nzg0MH0.kDgSurjAcPHpgv26yr-gvZPtOuBj8Au5pAH12CpOhP8"
-
+("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTE3LCJpYXQiOjE3MDMxODU4NDAsImV4cCI6MTcwNTc3Nzg0MH0.kDgSurjAcPHpgv26yr-gvZPtOuBj8Au5pAH12CpOhP8");
